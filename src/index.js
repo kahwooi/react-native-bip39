@@ -36,16 +36,16 @@ function salt(password) {
     return 'mnemonic' + (password || '');
 }
 function mnemonicToSeedSync(mnemonic, password) {
-    const mnemonicBuffer = Buffer.from(normalize(mnemonic), 'utf8');
-    const saltBuffer = Buffer.from(salt(normalize(password)), 'utf8');
+    const mnemonicBuffer = Buffer.from(mnemonic, 'utf8');
+    const saltBuffer = Buffer.from(salt(password), 'utf8');
     return pbkdf2_1.pbkdf2Sync(mnemonicBuffer, saltBuffer, 2048, 64, 'sha512');
 }
 exports.mnemonicToSeedSync = mnemonicToSeedSync;
 function mnemonicToSeed(mnemonic, password) {
     return new Promise((resolve, reject) => {
         try {
-            const mnemonicBuffer = Buffer.from(normalize(mnemonic), 'utf8');
-            const saltBuffer = Buffer.from(salt(normalize(password)), 'utf8');
+            const mnemonicBuffer = Buffer.from(mnemonic, 'utf8');
+            const saltBuffer = Buffer.from(salt(password), 'utf8');
             pbkdf2_1.pbkdf2(mnemonicBuffer, saltBuffer, 2048, 64, 'sha512', (err, data) => {
                 if (err)
                     return reject(err);

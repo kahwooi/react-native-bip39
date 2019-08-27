@@ -47,8 +47,8 @@ export function mnemonicToSeedSync(
   mnemonic: string,
   password?: string,
 ): Buffer {
-  const mnemonicBuffer = Buffer.from(normalize(mnemonic), 'utf8');
-  const saltBuffer = Buffer.from(salt(normalize(password)), 'utf8');
+  const mnemonicBuffer = Buffer.from(mnemonic, 'utf8');
+  const saltBuffer = Buffer.from(salt(password), 'utf8');
 
   return pbkdf2Sync(mnemonicBuffer, saltBuffer, 2048, 64, 'sha512');
 }
@@ -60,8 +60,8 @@ export function mnemonicToSeed(
   return new Promise(
     (resolve, reject): void => {
       try {
-        const mnemonicBuffer = Buffer.from(normalize(mnemonic), 'utf8');
-        const saltBuffer = Buffer.from(salt(normalize(password)), 'utf8');
+        const mnemonicBuffer = Buffer.from(mnemonic, 'utf8');
+        const saltBuffer = Buffer.from(salt(password), 'utf8');
         pbkdf2(mnemonicBuffer, saltBuffer, 2048, 64, 'sha512', (err, data) => {
           if (err) return reject(err);
           else return resolve(data);
