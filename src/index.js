@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const createHash = require("create-hash");
 const pbkdf2_1 = require("pbkdf2");
-const randomBytes = require("randombytes");
+let randomBytes = require('react-native-randombytes').randomBytes;
 const _wordlists_1 = require("./_wordlists");
 let DEFAULT_WORDLIST = _wordlists_1._default;
 const INVALID_MNEMONIC = 'Invalid mnemonic';
